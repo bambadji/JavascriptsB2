@@ -1,0 +1,31 @@
+<br><br><br><br>
+<details *ngFor="let filiere of filiereSearch?.content">
+    <summary><b>Filiere</b> : {{filiere?.libelle}}</summary>
+    <ul class="no-bullets">
+        <li>
+            <details *ngFor="let niveau of filiere?.niveaus">
+                <summary><b>Niveau</b> : {{niveau?.libelle}}</summary>
+                <ul class="no-bullets">
+                <li>
+                    <details *ngFor="let module of niveau.modules">
+                        <summary><b>Module</b> : {{module?.description}}</summary>
+                        <ul class="no-bullets">
+                            <li>
+                            <details *ngFor="let matiere of module.matieres">
+                                <summary><b>Matiere</b> : {{matiere?.libelle}}</summary>
+                                <ul class="no-bullets">
+                                <br>
+                                <li>Volume horaire : {{matiere?.volume_horaire}}</li>
+                                <hr>
+                                <li>Coef : 2</li>
+                                </ul>
+                            </details>
+                            </li>
+                        </ul>
+                    </details>
+                </li>
+                </ul>
+            </details>
+        </li>
+    </ul>
+</details>

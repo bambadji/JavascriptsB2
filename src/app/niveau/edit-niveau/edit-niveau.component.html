@@ -1,0 +1,57 @@
+<span *ngIf="progressBarQuery">
+	<mat-progress-bar color="accent" mode="indeterminate"> </mat-progress-bar>
+</span>
+<br><br><br><br>
+<div class="d-flex align-items-center justify-content-center">
+	<div class="card border-dark mb-12" style="width: 452px;" >
+		<div class="card-header"><h2>Modifier Niveau</h2></div>
+		<div class="card-body text-primary">
+			<!-- <h2 class="card-title">Nouveau Filiere</h2> -->
+			<!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+			<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" >
+                <input type="hidden" formControlName="id" required>
+				<div class="row">
+					<div class="col-12">
+						<mat-form-field class="mat-form-field">
+							<input matInput placeholder="libelle" formControlName="libelle" required>
+						</mat-form-field>
+					</div>
+				</div>
+				<br><br>
+				<div class="row">
+					<div class="col-12">
+						<mat-form-field class="mat-form-field">
+							<input matInput placeholder="description" formControlName="description" required>
+						</mat-form-field>
+					</div>
+				</div>
+				<br><br>
+				<div class="row">
+					<div class="col-12">
+                        <mat-form-field appearance="fill" class="mat-form-field">
+                            <mat-label>Filiere</mat-label>
+                            <mat-select formControlName="filiere"  required>
+                              <mat-option *ngFor="let filiere of allFiliere" [value]="filiere.id">
+                                {{filiere.libelle}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+					</div>
+				</div>
+
+				<!-- <button mat-raised-button type="button" (click)="authenticationService.goBack()" style="margin-right: 8px;">Annuler</button> -->
+				<button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+					<span *ngIf="progressBarQuery">
+						<mat-progress-bar color="primary" mode="indeterminate"> </mat-progress-bar>
+					</span>
+					Enregistrer
+				</button>
+                <button mat-raised-button type="button" (click)="goBack()" style="margin-left: 8px;">Annuler</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+	<br>
+	<pre>{{form.value | json}}</pre>

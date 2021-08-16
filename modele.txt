@@ -1,0 +1,9 @@
+User(id, login, password)
+
+filiere(id, libelle, description, duree )
+
+Niveau(id, libelle, description, filiere_id)
+
+Module(id, libelle, description, niveau_id)
+
+Matiere(id, libelle, volume_horaire, module_id)

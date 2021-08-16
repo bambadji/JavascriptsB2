@@ -1,0 +1,54 @@
+<span *ngIf="progressBarQuery">
+	<mat-progress-bar color="accent" mode="indeterminate"> </mat-progress-bar>
+</span>
+<br><br><br><br>
+<div class="d-flex align-items-center justify-content-center">
+	<div class="card border-dark mb-12" style="width: 452px;" >
+		<div class="card-header"><h2>Ajouter Module</h2></div>
+		<div class="card-body text-primary">
+			<!-- <h2 class="card-title">Nouveau Niveau</h2> -->
+			<!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+			<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" >
+				<div class="row">
+					<div class="col-12">
+						<mat-form-field class="mat-form-field">
+							<input matInput placeholder="libelle" formControlName="libelle" required>
+						</mat-form-field>
+					</div>
+				</div>
+				<br><br>
+				<div class="row">
+					<div class="col-12">
+						<mat-form-field class="mat-form-field">
+							<input matInput placeholder="description" formControlName="description" required>
+						</mat-form-field>
+					</div>
+				</div>
+				<br><br>
+				<div class="row">
+					<div class="col-12">
+                        <mat-form-field appearance="fill" class="mat-form-field">
+                            <mat-label>Choisir le niveau</mat-label>
+                            <mat-select formControlName="niveau" required>
+                              <mat-option *ngFor="let niveau of allNiveau" [value]="niveau.id">
+                                {{niveau.libelle}} ({{niveau.description}})
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+					</div>
+				</div>
+
+				<button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+					<span *ngIf="progressBarQuery">
+						<mat-progress-bar color="primary" mode="indeterminate"> </mat-progress-bar>
+					</span>
+					Enregistrer
+				</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+	<br>
+	<pre>{{form.value | json}}</pre>

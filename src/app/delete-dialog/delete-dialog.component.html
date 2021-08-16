@@ -1,0 +1,10 @@
+<h2 mat-dialog-title> 
+	<code>
+		<b><i class="glyphicon glyphicon-warning-sign"></i> {{data.title}}</b>
+	</code>
+</h2>
+<mat-dialog-content class="error"> <b> {{data.message}} </b></mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close class="mat-raised-button">Annuler</button>
+  <button mat-raised-button color="warn" (click)="onDelete()">Supprimer</button>
+</mat-dialog-actions>

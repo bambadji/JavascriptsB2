@@ -1,0 +1,84 @@
+<br><br><br><br>
+<div class="row">
+    <div class="col-12 " style="font-size: 50px; text-align: center;">LISTE DES FILIERES</div>
+</div>
+<br><br>
+<mat-form-field appearance="standard" style="font-size: 25px">
+    <mat-label>Filtrer</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Rechercher multi-critaire" #input>
+  </mat-form-field>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-offset-5 col-xs-7">
+			<span *ngIf="chargement">
+				<h2>Chargement...</h2>
+				<mat-progress-spinner color="primary" mode="indeterminate" ></mat-progress-spinner>
+			</span>
+		</div>
+	</div>
+</div>
+<div class="row" style="margin-right: 0px;">
+	<div class="col-xs-offset-10 col-xs-2">
+		<span *ngIf="suppression">
+			<strong>suppression...</strong>
+			<i class="glyphicon glyphicon-refresh glyphicon-refresh-animate" style="font-size:20px"></i>
+		</span>
+	</div>
+</div>
+<div>
+	<mat-table #table [dataSource]="dataSource" matSort>
+
+        <!-- ID Column -->
+		<ng-container matColumnDef="id">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
+			<mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+		</ng-container>
+
+        <!-- Libelle Column -->
+		<ng-container matColumnDef="libelle">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Libelle </mat-header-cell>
+			<mat-cell *matCellDef="let element"> {{element.libelle}} </mat-cell>
+		</ng-container>
+
+        <!-- description Column -->
+        <ng-container matColumnDef="description">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+			<mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+		</ng-container>
+
+        <!-- Duree Column -->
+        <ng-container matColumnDef="duree">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Duree </mat-header-cell>
+			<mat-cell *matCellDef="let element"> {{element.duree}} </mat-cell>
+		</ng-container>
+
+        <!-- <ng-container matColumnDef="patient">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Patient </mat-header-cell>
+			<mat-cell *matCellDef="let element"> {{element.patient?.prenom}} {{element.patient?.nom}} </mat-cell>
+		</ng-container> -->
+
+		<ng-container matColumnDef="action">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> ACTION </mat-header-cell>
+			<mat-cell *matCellDef="let element">
+				<button mat-stroked-button color="primary" (click)="goToPageEdit(element.id)">
+					<mat-icon svgIcon="thumbs-up1" aria-hidden="false" aria-label="Modifier"></mat-icon>
+				</button>
+				<button mat-stroked-button color="warn" (click)="onDelete(element.id)">
+					<i class="bi bi-trash"></i>
+                    <mat-icon svgIcon="thumbs-up2" aria-hidden="false" aria-label="Supprimer"></mat-icon>
+				</button>
+				<!-- <a mat-stroked-button routerLink="/edit-contact/{{contact.id}}">Editer</a> -->
+			</mat-cell>
+		</ng-container>
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row *matRowDef="let row; columns: displayedColumns;" (click) = "rowClicked(row)"></mat-row>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">Aucune donnée correspondant au filtre "{{input.value}}"</td>
+        </tr>
+
+	</mat-table>
+	<mat-paginator [length]="5" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"> </mat-paginator>
+</div>
+<br><br><br><br>
